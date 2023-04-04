@@ -657,13 +657,12 @@ public class SolicitudRepositoryImpl implements SolicitudRepository {
                 Object[] tuple = (Object[]) item;
 
                 BigDecimal idSolicitud = (BigDecimal) tuple[0];
-                BigDecimal idDetalle = (BigDecimal) tuple[1];
-                String dniCrea = (String) tuple[2];
-                String dniSolicita = (String) tuple[3];
-                String persona = (String) tuple[4];
-                Date fecAper = (Date) tuple[5];
-                Date fecCierre = (Date) tuple[6];
-                BigDecimal estadoSol = (BigDecimal) tuple[7];
+                String dniCrea = (String) tuple[1];
+                String dniSolicita = (String) tuple[2];
+                String persona = (String) tuple[3];
+                Date fecAper = (Date) tuple[4];
+                Date fecCierre = (Date) tuple[5];
+                BigDecimal estadoSol = (BigDecimal) tuple[6];
 
                 HashMap<String,Object> m = new HashMap<>();
 
@@ -682,7 +681,7 @@ public class SolicitudRepositoryImpl implements SolicitudRepository {
                 }
 
                 m.put("idSolicitud",idSolicitud);
-                m.put("idDetalle",idDetalle);
+
                 m.put("dniCrea",dniCrea);
                 m.put("persona",persona);
                 m.put("dniSolicita",dniSolicita);

@@ -10,6 +10,7 @@ public class inSolicitud {
 
     String inDniPersonaCrea;
     String inDniPersonaSolicitado;
+    String inDniPersonaAprobacion;
 
     String idCadena;
     String desCadena;
@@ -23,7 +24,7 @@ public class inSolicitud {
 
     Long idSolicitud;
     Long idSolicitudDetalle;
-    Long idSistema;
+    Integer idSistema;
     String descAprobacion;
     String observacion;
 

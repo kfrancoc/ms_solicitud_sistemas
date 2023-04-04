@@ -622,13 +622,7 @@ public class SolicitudRepositoryImpl implements SolicitudRepository {
         if(insb.getEstado() == null){
             insb.setEstado(0);
         }
-        if(insb.getImpBusqueda()==null){
-            insb.setImpBusqueda("");
-        }
 
-        /*if(insb.getIdResponsable() == null){
-            insb.setIdResponsable(0);
-        }*/
         try{
 
             StoredProcedureQuery query = em.createStoredProcedureQuery("SP_LISTAR_CREA_SOLICITUD");
@@ -782,6 +776,121 @@ public class SolicitudRepositoryImpl implements SolicitudRepository {
             em.close();
         }
         return result;
+    }
+
+    @Override
+    public outListaPaginada listarAprobSolicitud(inSolicitud insb) {
+        outListaPaginada outListaPaginada = new outListaPaginada();
+        List<HashMap<String,Object>> result = new ArrayList<>();
+
+        if(insb.getImpBusqueda() == null){
+            insb.setImpBusqueda("");
+        }
+        if(insb.getEstadodet() == null){
+            insb.setEstadodet("");
+        }
+        if(insb.getIdSistema() == null){
+            insb.setIdSistema(0);
+        }
+
+
+
+        try{
+
+            StoredProcedureQuery query = em.createStoredProcedureQuery("SP_LISTAR_APROB_SOLICITUD");
+
+
+            query.registerStoredProcedureParameter("IN_PAR_BUSQUEDA",String.class,ParameterMode.IN);
+            query.registerStoredProcedureParameter("IN_CANT_REG", Integer.class,ParameterMode.IN);
+            query.registerStoredProcedureParameter("IN_NUM_PAGINA", Integer.class,ParameterMode.IN);
+            query.registerStoredProcedureParameter("IN_DNI_APRO", String.class,ParameterMode.IN);
+            query.registerStoredProcedureParameter("IN_ESTADO", String.class,ParameterMode.IN);
+            query.registerStoredProcedureParameter("IN_ID_SISTEMA", Integer.class,ParameterMode.IN);
+
+
+            query.registerStoredProcedureParameter("OUT_LISTA", ResultSet.class,ParameterMode.REF_CURSOR);
+            query.registerStoredProcedureParameter("OUT_MENSAJE", String.class,ParameterMode.OUT);
+            query.registerStoredProcedureParameter("OUT_CANT_REGISTRO",Integer.class,ParameterMode.OUT);
+
+
+            query.setParameter("IN_PAR_BUSQUEDA",insb.getImpBusqueda());
+            query.setParameter("IN_CANT_REG", insb.getCantReg());
+            query.setParameter("IN_NUM_PAGINA",insb.getNumPag());
+            query.setParameter("IN_DNI_APRO", insb.getInDniPersonaAprobacion());
+            query.setParameter("IN_ESTADO",insb.getEstadodet());
+            query.setParameter("IN_ID_SISTEMA",insb.getIdSistema());
+
+
+
+            Integer cant = (Integer) query.getOutputParameterValue("OUT_CANT_REGISTRO");
+            String  msj = (String) query.getOutputParameterValue("OUT_MENSAJE");
+
+
+            List<Object> ls = query.getResultList();
+
+            for (Object item : ls){
+                Object[] tuple = (Object[]) item;
+
+                BigDecimal idSolicitud = (BigDecimal) tuple[0];
+                BigDecimal idDetalle = (BigDecimal) tuple[1];
+                String dniSolicita = (String) tuple[2];
+                String persona = (String) tuple[3];
+                String descSistema = (String) tuple[4];
+                String descSolicitud = (String) tuple[5];
+                String descArpobacion = (String) tuple[6];
+                Date fecAper = (Date) tuple[7];
+                Date fecApro = (Date) tuple[8];
+                Date fecUsuario = (Date) tuple[9];
+                String descObservacion = (String) tuple[10];
+                Character estadoDetalle = (Character) tuple[11];
+
+                HashMap<String,Object> m = new HashMap<>();
+
+                SimpleDateFormat format1 = new SimpleDateFormat("dd/MM/yyyy");
+
+                m.put("idSolicitud",idSolicitud);
+                m.put("idDetalle",idDetalle);
+                m.put("dniSolicita",dniSolicita);
+                m.put("persona",persona);
+                m.put("descSistema",descSistema);
+                m.put("descSolicitud",descSolicitud);
+                m.put("descArpobacion",descArpobacion);
+
+                if (fecAper != null){
+                    String fecha_aper = format1.format(fecAper);
+                    m.put("fecAper",fecha_aper);
+                }
+
+                if (fecApro != null){
+                    String fec_Apro = format1.format(fecApro);
+                    m.put("fecApro",fec_Apro);
+                }
+                if (fecUsuario != null){
+                    String fec_Usuario = format1.format(fecUsuario);
+                    m.put("fecUsuario",fec_Usuario);
+                }
+
+                m.put("descObservacion",descObservacion);
+                m.put("estadoDetalle",estadoDetalle);
+
+
+                result.add(m);
+
+
+            }
+
+            outListaPaginada.setLista(result);
+            outListaPaginada.setCantidad(cant);
+            outListaPaginada.setMensaje(msj);
+
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }finally {
+            em.close();
+        }
+
+        return outListaPaginada;
     }
 
 }

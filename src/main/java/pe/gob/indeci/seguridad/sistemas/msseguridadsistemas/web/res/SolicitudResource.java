@@ -134,5 +134,11 @@ public class SolicitudResource {
 
         return  result;
     }
+    @PostMapping("/seguridad-solicitud/listar-aprob-solicitud")
+    public outListaPaginada listarAprobSolicitud(@Valid @RequestBody inSolicitud insb)throws URISyntaxException {
+
+        outListaPaginada result = this.solicitudServices.listarAprobSolicitud(insb);
+        return  result;
+    }
 
 }

@@ -39,4 +39,6 @@ public interface SolicitudServices {
     outListaPaginada listarCreaSolicitud(inSolicitud insb);
 
     List<outDetalleSolicitud> detalleCreaSolicitud(Integer cod);
+
+    outListaPaginada listarAprobSolicitud(inSolicitud insb);
 }

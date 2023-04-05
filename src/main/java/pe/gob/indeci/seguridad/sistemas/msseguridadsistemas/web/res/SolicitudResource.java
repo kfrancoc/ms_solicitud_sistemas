@@ -140,5 +140,12 @@ public class SolicitudResource {
         outListaPaginada result = this.solicitudServices.listarAprobSolicitud(insb);
         return  result;
     }
+    @GetMapping("/seguridad-solicitud/detalle-aprob-solicitud/{cod}")
+    public List<outDetalleSolicitud> detalleAprobSolicitud(@PathVariable Integer cod) throws URISyntaxException {
+
+        List<outDetalleSolicitud> result = this.solicitudServices.detalleAprobSolicitud(cod);
+
+        return  result;
+    }
 
 }

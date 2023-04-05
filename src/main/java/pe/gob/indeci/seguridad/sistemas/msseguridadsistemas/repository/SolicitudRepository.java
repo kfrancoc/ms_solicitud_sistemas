@@ -41,4 +41,6 @@ public interface SolicitudRepository {
     List<outDetalleSolicitud> detalleCreaSolicitud(Integer cod);
 
     outListaPaginada listarAprobSolicitud(inSolicitud insb);
+
+    List<outDetalleSolicitud> detalleAprobSolicitud(Integer cod);
 }

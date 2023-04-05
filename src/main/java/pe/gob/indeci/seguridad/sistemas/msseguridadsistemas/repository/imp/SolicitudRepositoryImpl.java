@@ -892,6 +892,76 @@ public class SolicitudRepositoryImpl implements SolicitudRepository {
         return outListaPaginada;
     }
 
+    @Override
+    public List<outDetalleSolicitud> detalleAprobSolicitud(Integer cod) {
+
+        List<outDetalleSolicitud> result =  new ArrayList<>();
+
+
+        try {
+            StoredProcedureQuery query =  em.createStoredProcedureQuery("SP_DETALLE_APROB_SOLICITUD");
+
+            query.registerStoredProcedureParameter("IN_ID_DETALLE",Integer.class,ParameterMode.IN);
+            query.registerStoredProcedureParameter("OUT_LIST", ResultSet.class, ParameterMode.REF_CURSOR);
+            query.registerStoredProcedureParameter("OUT_MENSAJE",String.class,ParameterMode.OUT);
+
+            query.setParameter("IN_ID_DETALLE",cod);
+
+            List<Object> ls = query.getResultList();
+
+            for (Object item : ls){
+
+
+                Object[] tuple = (Object[]) item;
+                BigDecimal idDetalle = (BigDecimal) tuple[0];
+                BigDecimal idSolicitud = (BigDecimal) tuple[1];
+                String descripcion = (String) tuple[2];
+                String descSolicitud = (String) tuple[3];
+                String descAprobacion = (String) tuple[4];
+                Date fechApertura =(Date) tuple [5];
+                Date fechAprobacion =(Date) tuple [6];
+                Date fechCreaUsuario =(Date) tuple [7];
+                String observacion = (String) tuple[8];
+                Character estadoDetalle = (Character) tuple[9];
+
+
+                outDetalleSolicitud os= new outDetalleSolicitud();
+                SimpleDateFormat format1 = new SimpleDateFormat("dd/MM/yyyy");
+
+                os.setIdSolDetalle(idDetalle.longValue());
+                os.setIdSolicitud(idSolicitud.longValue());
+                os.setDescSistema(descripcion);
+                os.setDescSolicitud(descSolicitud);
+                os.setDescAprobacion(descAprobacion);
+
+                if (fechApertura != null){
+                    String fech_Apertura = format1.format(fechApertura);
+                    os.setFechApertura(fech_Apertura);
+                }
+                if (fechAprobacion != null){
+                    String fech_Aprobacion = format1.format(fechAprobacion);
+                    os.setFechAprobacion(fech_Aprobacion);
+                }
+                if (fechCreaUsuario != null){
+                    String fech_CreaUsuario = format1.format(fechCreaUsuario);
+                    os.setFechCreaUsuario(fech_CreaUsuario);
+                }
+
+                os.setObsSolicitud(observacion);
+                os.setEstadoDetalle(estadoDetalle);
+
+
+                result.add(os);
+            }
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }finally {
+            em.close();
+        }
+        return result;
+    }
+
 }
 
 

@@ -102,4 +102,9 @@ public class SolicitudServicesImpl implements SolicitudServices {
     public outListaPaginada listarAprobSolicitud(inSolicitud insb) {
         return this.solicitudRepository.listarAprobSolicitud(insb);
     }
+
+    @Override
+    public List<outDetalleSolicitud> detalleAprobSolicitud(Integer cod) {
+        return this.solicitudRepository.detalleAprobSolicitud(cod);
+    }
 }

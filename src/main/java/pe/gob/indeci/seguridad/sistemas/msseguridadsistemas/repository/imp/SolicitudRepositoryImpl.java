@@ -962,6 +962,48 @@ public class SolicitudRepositoryImpl implements SolicitudRepository {
         return result;
     }
 
+    @Override
+    public List<outListaSimple> listarSistemaAprob(String cod) {
+        List<outListaSimple> result =  new ArrayList<>();
+
+
+
+        try {
+            StoredProcedureQuery query =  em.createStoredProcedureQuery("SP_LISTAR_SIS_APROB");
+
+            query.registerStoredProcedureParameter("IN_DOC_APROB",String.class,ParameterMode.IN);
+            query.registerStoredProcedureParameter("OUT_LIST", ResultSet.class, ParameterMode.REF_CURSOR);
+            query.registerStoredProcedureParameter("OUT_MENSAJE",String.class,ParameterMode.OUT);
+
+            query.setParameter("IN_DOC_APROB",cod);
+
+            List<Object> ls = query.getResultList();
+
+            for (Object item : ls){
+                Object[] tuple = (Object[]) item;
+                BigDecimal id = (BigDecimal) tuple[0];
+                String descripcion = (String) tuple[1];
+
+
+                outListaSimple os= new outListaSimple();
+
+                os.setId(id.longValue());
+                os.setDescripcion(descripcion);
+
+
+
+
+                result.add(os);
+            }
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }finally {
+            em.close();
+        }
+        return result;
+    }
+
 }
 
 

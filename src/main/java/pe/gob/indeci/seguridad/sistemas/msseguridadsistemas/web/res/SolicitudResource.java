@@ -148,4 +148,11 @@ public class SolicitudResource {
         return  result;
     }
 
+    @GetMapping("/seguridad-solicitud/listar-sistema-aprob/{cod}")
+    public List<outListaSimple> listarSistemaAprob(@PathVariable String cod) throws URISyntaxException {
+
+        List<outListaSimple> result = this.solicitudServices.listarSistemaAprob(cod);
+
+        return  result;
+    }
 }

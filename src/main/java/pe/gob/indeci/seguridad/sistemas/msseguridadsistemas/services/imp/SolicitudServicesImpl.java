@@ -107,4 +107,9 @@ public class SolicitudServicesImpl implements SolicitudServices {
     public List<outDetalleSolicitud> detalleAprobSolicitud(Integer cod) {
         return this.solicitudRepository.detalleAprobSolicitud(cod);
     }
+
+    @Override
+    public List<outListaSimple> listarSistemaAprob(String cod) {
+        return this.solicitudRepository.listarSistemaAprob(cod);
+    }
 }

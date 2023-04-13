@@ -167,6 +167,25 @@ public class SolicitudRepositoryImpl implements SolicitudRepository {
 
         Integer result = 0;
 
+        if(is.getRuta() == null){
+            is.setRuta("");
+        }
+        if(is.getNombre() == null){
+            is.setNombre("");
+        }
+        if(is.getArchivo() == null){
+            is.setArchivo("");
+        }
+        if(is.getTamanio() == null){
+            is.setTamanio("");
+        }
+        if(is.getTipo() == null){
+            is.setTipo("");
+        }
+        if(is.getDescripcion() == null){
+            is.setDescripcion("");
+        }
+
         try{
 
             StoredProcedureQuery query = em.createStoredProcedureQuery("SP_INSERTAR_SOLICITUD");
@@ -178,7 +197,7 @@ public class SolicitudRepositoryImpl implements SolicitudRepository {
             query.registerStoredProcedureParameter("IN_RUTA_DOC",String.class,ParameterMode.IN);
             query.registerStoredProcedureParameter("IN_NOMBRE_DOC",String.class,ParameterMode.IN);
             query.registerStoredProcedureParameter("IN_ARCHIVO_DOC",String.class,ParameterMode.IN);
-            query.registerStoredProcedureParameter("IN_TAMANIO_DOC",Long.class,ParameterMode.IN);
+            query.registerStoredProcedureParameter("IN_TAMANIO_DOC",String.class,ParameterMode.IN);
             query.registerStoredProcedureParameter("IN_TIPO_DOC",String.class,ParameterMode.IN);
             query.registerStoredProcedureParameter("IN_DESCRIPCION_DOC",String.class,ParameterMode.IN);
 

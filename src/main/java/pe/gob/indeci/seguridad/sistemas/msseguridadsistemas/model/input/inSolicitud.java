@@ -16,7 +16,7 @@ public class inSolicitud {
     String ruta;
     String nombre;
     String archivo;
-    Long tamanio;
+    String tamanio;
     String tipo;
     String descripcion;
 

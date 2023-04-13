@@ -2,6 +2,7 @@ package pe.gob.indeci.seguridad.sistemas.msseguridadsistemas.web.res;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import pe.gob.indeci.seguridad.sistemas.msseguridadsistemas.model.input.inArchivo;
 import pe.gob.indeci.seguridad.sistemas.msseguridadsistemas.model.input.inBusquedaPersona;
 import pe.gob.indeci.seguridad.sistemas.msseguridadsistemas.model.input.inPersona;
 import pe.gob.indeci.seguridad.sistemas.msseguridadsistemas.model.input.inSolicitud;
@@ -155,4 +156,6 @@ public class SolicitudResource {
 
         return  result;
     }
+
+
 }

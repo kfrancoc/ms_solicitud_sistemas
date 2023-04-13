@@ -2,8 +2,7 @@ package pe.gob.indeci.seguridad.sistemas.msseguridadsistemas.model.input;
 
 import lombok.Data;
 
-import java.util.HashMap;
-import java.util.List;
+
 
 @Data
 public class inSolicitud {
@@ -14,6 +13,15 @@ public class inSolicitud {
 
     String idCadena;
     String desCadena;
+    String ruta;
+    String nombre;
+    String archivo;
+    Long tamanio;
+    String tipo;
+    String descripcion;
+
+
+
     //LISTAR
     String impBusqueda;
     Integer cantReg;

@@ -1,6 +1,7 @@
 package pe.gob.indeci.seguridad.sistemas.msseguridadsistemas.repository;
 
 import org.springframework.stereotype.Repository;
+import pe.gob.indeci.seguridad.sistemas.msseguridadsistemas.model.input.inArchivo;
 import pe.gob.indeci.seguridad.sistemas.msseguridadsistemas.model.input.inBusquedaPersona;
 import pe.gob.indeci.seguridad.sistemas.msseguridadsistemas.model.input.inPersona;
 import pe.gob.indeci.seguridad.sistemas.msseguridadsistemas.model.input.inSolicitud;
@@ -45,4 +46,6 @@ public interface SolicitudRepository {
     List<outDetalleSolicitud> detalleAprobSolicitud(Integer cod);
 
     List<outListaSimple> listarSistemaAprob(String cod);
+
+
 }

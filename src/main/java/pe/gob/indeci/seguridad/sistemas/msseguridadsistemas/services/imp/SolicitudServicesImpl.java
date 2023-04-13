@@ -3,6 +3,7 @@ package pe.gob.indeci.seguridad.sistemas.msseguridadsistemas.services.imp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import pe.gob.indeci.seguridad.sistemas.msseguridadsistemas.model.input.inArchivo;
 import pe.gob.indeci.seguridad.sistemas.msseguridadsistemas.model.input.inBusquedaPersona;
 import pe.gob.indeci.seguridad.sistemas.msseguridadsistemas.model.input.inPersona;
 import pe.gob.indeci.seguridad.sistemas.msseguridadsistemas.model.input.inSolicitud;
@@ -20,6 +21,7 @@ public class SolicitudServicesImpl implements SolicitudServices {
 
     @Autowired
     private SolicitudRepository solicitudRepository;
+   // private DetalleArchivoRepository detalleArchivoRepository;
 
     @Override
     public outBusquedaPersona busquedaPersona(inBusquedaPersona inbusp){
@@ -112,4 +114,6 @@ public class SolicitudServicesImpl implements SolicitudServices {
     public List<outListaSimple> listarSistemaAprob(String cod) {
         return this.solicitudRepository.listarSistemaAprob(cod);
     }
+
+
 }

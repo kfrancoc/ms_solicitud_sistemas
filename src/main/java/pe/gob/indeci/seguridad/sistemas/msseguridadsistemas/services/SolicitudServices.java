@@ -1,6 +1,6 @@
 package pe.gob.indeci.seguridad.sistemas.msseguridadsistemas.services;
 
-import org.springframework.web.bind.annotation.RequestBody;
+
 import pe.gob.indeci.seguridad.sistemas.msseguridadsistemas.model.input.inBusquedaPersona;
 import pe.gob.indeci.seguridad.sistemas.msseguridadsistemas.model.input.inPersona;
 import pe.gob.indeci.seguridad.sistemas.msseguridadsistemas.model.input.inSolicitud;
@@ -45,4 +45,6 @@ public interface SolicitudServices {
     List<outDetalleSolicitud> detalleAprobSolicitud(Integer cod);
 
     List<outListaSimple> listarSistemaAprob(String cod);
+
+
 }

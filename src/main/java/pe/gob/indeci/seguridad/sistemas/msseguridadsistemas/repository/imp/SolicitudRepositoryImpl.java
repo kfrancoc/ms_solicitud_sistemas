@@ -1,6 +1,7 @@
 package pe.gob.indeci.seguridad.sistemas.msseguridadsistemas.repository.imp;
 
 import org.springframework.stereotype.Repository;
+import pe.gob.indeci.seguridad.sistemas.msseguridadsistemas.model.input.inArchivo;
 import pe.gob.indeci.seguridad.sistemas.msseguridadsistemas.model.input.inBusquedaPersona;
 import pe.gob.indeci.seguridad.sistemas.msseguridadsistemas.model.input.inPersona;
 import pe.gob.indeci.seguridad.sistemas.msseguridadsistemas.model.input.inSolicitud;
@@ -174,6 +175,13 @@ public class SolicitudRepositoryImpl implements SolicitudRepository {
             query.registerStoredProcedureParameter("IN_CADENA_ID", String.class,ParameterMode.IN);
             query.registerStoredProcedureParameter("IN_CADENA_DESC",String.class,ParameterMode.IN);
 
+            query.registerStoredProcedureParameter("IN_RUTA_DOC",String.class,ParameterMode.IN);
+            query.registerStoredProcedureParameter("IN_NOMBRE_DOC",String.class,ParameterMode.IN);
+            query.registerStoredProcedureParameter("IN_ARCHIVO_DOC",String.class,ParameterMode.IN);
+            query.registerStoredProcedureParameter("IN_TAMANIO_DOC",Long.class,ParameterMode.IN);
+            query.registerStoredProcedureParameter("IN_TIPO_DOC",String.class,ParameterMode.IN);
+            query.registerStoredProcedureParameter("IN_DESCRIPCION_DOC",String.class,ParameterMode.IN);
+
             query.registerStoredProcedureParameter("OUT_COD", Integer.class,ParameterMode.OUT);
             query.registerStoredProcedureParameter("OUT_MENSAJE", String.class,ParameterMode.OUT);
 
@@ -181,6 +189,14 @@ public class SolicitudRepositoryImpl implements SolicitudRepository {
             query.setParameter("IN_DNI_PERSONA_SOLICITADO", is.getInDniPersonaSolicitado());
             query.setParameter("IN_CADENA_ID", is.getIdCadena());
             query.setParameter("IN_CADENA_DESC", is.getDesCadena());
+
+            query.setParameter("IN_RUTA_DOC", is.getRuta());
+            query.setParameter("IN_NOMBRE_DOC", is.getNombre());
+            query.setParameter("IN_ARCHIVO_DOC", is.getArchivo());
+            query.setParameter("IN_TAMANIO_DOC", is.getTamanio());
+            query.setParameter("IN_TIPO_DOC", is.getTipo());
+            query.setParameter("IN_DESCRIPCION_DOC", is.getDescripcion());
+
             query.execute();
 
             result = (Integer) query.getOutputParameterValue("OUT_COD");
@@ -1003,6 +1019,10 @@ public class SolicitudRepositoryImpl implements SolicitudRepository {
         }
         return result;
     }
+
+
+
+
 
 }
 

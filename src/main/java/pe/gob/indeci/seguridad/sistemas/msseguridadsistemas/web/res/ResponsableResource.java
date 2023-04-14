@@ -38,7 +38,7 @@ public class ResponsableResource {
         return  result;
     }
 
-    @GetMapping("/seguridad-persona/listar-usuario-responsable")
+    @PostMapping("/seguridad-persona/listar-usuario-responsable")
     public outListaPaginada listarUsuarioResponsable(@Valid @RequestBody inBuscarResponsable insb)throws URISyntaxException {
 
         outListaPaginada result = this.responsableServices.listarUsuarioResponsable(insb);

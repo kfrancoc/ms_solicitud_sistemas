@@ -29,20 +29,23 @@ public class SistemaRepositoryImpl implements SistemaRepository {
     private EntityManager em;
 
     @Override
-    public List<inSistemas> crearSistema (inSistemas is) {
+    public String crearSistema (inSistemas is) {
 
-        List<inSistemas> result = new ArrayList<>();
+        String result = "";
+
+        if(is.getFecPublicacion() == null){
+            is.setFecPublicacion("");
+        }
 
         try {
-
             StoredProcedureQuery storedProcedureQuery = em.createStoredProcedureQuery("SP_INSERTAR_SISTEMA");
                 storedProcedureQuery.registerStoredProcedureParameter("IN_DESCRIPCION", String.class, ParameterMode.IN);
                 storedProcedureQuery.registerStoredProcedureParameter("IN_SIGLAS", String.class, ParameterMode.IN);
                 storedProcedureQuery.registerStoredProcedureParameter("IN_URL", String.class, ParameterMode.IN);
                 //storedProcedureQuery.registerStoredProcedureParameter("IN_USUARIO_CREADO", Long.class, ParameterMode.IN);
                 //storedProcedureQuery.registerStoredProcedureParameter("IN_ID_USUARIO_MODIFICADO", Long.class, ParameterMode.IN);
-                storedProcedureQuery.registerStoredProcedureParameter("IN_FECHA_PUBLICACION", Date.class,ParameterMode.IN);
-                storedProcedureQuery.registerStoredProcedureParameter("OUT_LIST", Result.class, ParameterMode.REF_CURSOR);
+                storedProcedureQuery.registerStoredProcedureParameter("IN_FECHA_PUBLICACION", String.class,ParameterMode.IN);
+                //storedProcedureQuery.registerStoredProcedureParameter("OUT_LIST", Result.class, ParameterMode.REF_CURSOR);
                 storedProcedureQuery.registerStoredProcedureParameter("OUT_MENSAJE", String.class, ParameterMode.OUT);
 
 
@@ -53,8 +56,10 @@ public class SistemaRepositoryImpl implements SistemaRepository {
             //storedProcedureQuery.setParameter("IN_ID_USUARIO_MODIFICADO", is.getIdUsuarioCreado());
             storedProcedureQuery.setParameter("IN_FECHA_PUBLICACION", is.getFecPublicacion());
 
-            List<inSistemas> ls = storedProcedureQuery.getResultList();
+            result = (String) storedProcedureQuery.getOutputParameterValue("OUT_MENSAJE");
 
+          //  List<inSistemas> ls = storedProcedureQuery.getResultList();
+/*
             for (Object item : ls) {
 
                 Object[] tuple = (Object[]) item;
@@ -84,6 +89,7 @@ public class SistemaRepositoryImpl implements SistemaRepository {
 
                 result.add(ins);
             }
+            */
         } catch (Exception e) {
             e.printStackTrace();
         } finally {

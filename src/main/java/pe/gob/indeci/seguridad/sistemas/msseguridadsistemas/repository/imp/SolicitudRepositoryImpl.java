@@ -516,7 +516,7 @@ public class SolicitudRepositoryImpl implements SolicitudRepository {
             StoredProcedureQuery query = em.createStoredProcedureQuery("SP_ESTADO_SOLICITUD");
             query.registerStoredProcedureParameter("IN_ID_SOLICITUD", Long.class,ParameterMode.IN);
             query.registerStoredProcedureParameter("IN_ID_SOL_DET", Long.class,ParameterMode.IN);
-            query.registerStoredProcedureParameter("IN_ID_SISTEMA", Long.class,ParameterMode.IN);
+            //query.registerStoredProcedureParameter("IN_ID_SISTEMA", Long.class,ParameterMode.IN);
             query.registerStoredProcedureParameter("IN_DESC_APROB",String.class,ParameterMode.IN);
             query.registerStoredProcedureParameter("IN_OBS",String.class,ParameterMode.IN);
             query.registerStoredProcedureParameter("IN_ESTADO",Integer.class,ParameterMode.IN);
@@ -526,7 +526,7 @@ public class SolicitudRepositoryImpl implements SolicitudRepository {
 
             query.setParameter("IN_ID_SOLICITUD", is.getIdSolicitud());
             query.setParameter("IN_ID_SOL_DET", is.getIdSolicitudDetalle());
-            query.setParameter("IN_ID_SISTEMA", is.getIdSistema());
+            //query.setParameter("IN_ID_SISTEMA", is.getIdSistema());
             query.setParameter("IN_DESC_APROB", is.getDescAprobacion());
             query.setParameter("IN_OBS", is.getObservacion());
             query.setParameter("IN_ESTADO", is.getEstado());
@@ -826,6 +826,10 @@ public class SolicitudRepositoryImpl implements SolicitudRepository {
         if(insb.getIdSistema() == null){
             insb.setIdSistema(0);
         }
+        if(insb.getIdResponsable() == null){
+            insb.setIdResponsable(null);
+        }
+
 
 
 

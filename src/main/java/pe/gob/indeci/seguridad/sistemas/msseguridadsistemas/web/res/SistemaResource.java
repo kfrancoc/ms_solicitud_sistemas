@@ -29,8 +29,8 @@ public class SistemaResource {
 
     }
     @PostMapping("/seguridad-sistema/crear-sistema")
-    public List<inSistemas>crearSistema(@Valid @RequestBody inSistemas is) throws URISyntaxException{
-    List<inSistemas> result =this.sistemasServices.crearSistema(is);
+    public String crearSistema(@Valid @RequestBody inSistemas is) throws URISyntaxException{
+    String result = this.sistemasServices.crearSistema(is);
     return result;
     }
 

@@ -15,7 +15,7 @@ import java.util.List;
 public interface SistemaRepository {
 
     //CRUD SISTEMA
-    List<inSistemas> crearSistema(inSistemas is);
+    String crearSistema(inSistemas is);
 
     List<inSistemas>detalleSistema(Integer cod);
 

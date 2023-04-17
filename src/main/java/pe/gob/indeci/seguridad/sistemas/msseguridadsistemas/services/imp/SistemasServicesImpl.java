@@ -26,7 +26,7 @@ public class SistemasServicesImpl implements SistemasServices {
 
     @Override
 
-    public List<inSistemas> crearSistema(inSistemas is){
+    public String crearSistema(inSistemas is){
 
         return this.sistemaRepository.crearSistema(is);
 

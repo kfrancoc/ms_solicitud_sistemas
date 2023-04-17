@@ -11,7 +11,7 @@ import java.util.List;
 
 public interface SistemasServices {
 
-List<inSistemas> crearSistema (inSistemas is);
+String crearSistema (inSistemas is);
 List<inSistemas>detalleSistema (Integer cod);
 List<inSistemas>updateSistema(inSistemas is);
 List<inSistemas>eliminarSistema(Integer cod);

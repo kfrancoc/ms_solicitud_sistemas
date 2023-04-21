@@ -33,10 +33,6 @@ public class SistemaRepositoryImpl implements SistemaRepository {
 
         String result = "";
 
-        if(is.getFecPublicacion() == null){
-            is.setFecPublicacion("");
-        }
-
         try {
             StoredProcedureQuery storedProcedureQuery = em.createStoredProcedureQuery("SP_INSERTAR_SISTEMA");
                 storedProcedureQuery.registerStoredProcedureParameter("IN_DESCRIPCION", String.class, ParameterMode.IN);
@@ -237,7 +233,7 @@ public class SistemaRepositoryImpl implements SistemaRepository {
                 BigDecimal idUsuCreado = (BigDecimal) tuple[6];
                 String siglas = (String) tuple[7];
                 String url = (String) tuple[8];
-                String fecPub = (String)tuple[9];
+                String fecPub = (String) tuple[9];
 
 
                 inSistemas ins = new inSistemas();
